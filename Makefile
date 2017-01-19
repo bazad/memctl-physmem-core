@@ -2,13 +2,15 @@
 
 MEMCTL_INC_DIR = .
 
-SRC_DIR = .
+SRC_DIR = src
 OBJ_DIR = obj
 LIB_DIR = .
 
-ERRFLAGS = -Wall -Wpedantic -Wno-gnu-folding-constant -Wno-gnu-zero-variadic-macro-arguments -Werror
-CFLAGS   = -O3 -I$(MEMCTL_INC_DIR) $(ERRFLAGS)
+ERRFLAGS = -Wall -Wpedantic -Wno-gnu -Werror
+CFLAGS   = -O3 -I$(SRC_DIR) -I$(MEMCTL_INC_DIR) $(ERRFLAGS)
 ARFLAGS  = r
+
+CORE_LIB = $(LIB_DIR)/libmemctl_core.a
 
 PHYSMEM_SRCS = core.c \
 	       kernel_image.c \
@@ -28,7 +30,7 @@ PHYSMEM_OBJS := $(patsubst %.c,%.o,$(filter %.c,$(PHYSMEM_SRCS))) \
 	        $(patsubst %.s,%.o,$(filter %.s,$(PHYSMEM_SRCS)))
 PHYSMEM_OBJS := $(PHYSMEM_OBJS:%=$(OBJ_DIR)/%)
 
-CORE_LIB = $(LIB_DIR)/libmemctl_core.a
+vpath % $(SRC_DIR)
 
 all: $(CORE_LIB)
 
