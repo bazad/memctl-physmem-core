@@ -31,8 +31,8 @@ void probe_kernel_slide() {
 	const kaddr_t increment = 0x200000;
 	const kaddr_t max_slide = (increment / 2) * 0x400;
 	// Find the address of vm_kernel_slide and bootsessionuuid_string in the base kernel.
-	kaddr_t _vm_kernel_slide = kernel_symbol("_vm_kernel_slide");
-	kaddr_t _bootsessionuuid_string = kernel_symbol("_bootsessionuuid_string");
+	kaddr_t _vm_kernel_slide = kernel_sym("_vm_kernel_slide");
+	kaddr_t _bootsessionuuid_string = kernel_sym("_bootsessionuuid_string");
 	// Read the memory we will use to check kernel slide correctness.
 	char uuid[37];
 	size_t size = sizeof(uuid);
